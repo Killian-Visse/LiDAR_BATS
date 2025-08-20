@@ -66,4 +66,3 @@ Sys.sleep(0)
 print( Sys.time() - start) #Afficher le temps de téléchargement des dalles 
 
 #Maintenant vous avez téléchargé les dalles LiDAR dont vous aviez besoin
-#i dont understand very well
