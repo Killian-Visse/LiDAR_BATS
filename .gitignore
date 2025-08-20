@@ -47,3 +47,9 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
+
+#Ignore résultats et data pour ne pas encombrer la mémoire pour git 
+data/*
+results/*
+!data/.gitkeep
+!results/.gitkeep
