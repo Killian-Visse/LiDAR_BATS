@@ -14,7 +14,7 @@ library(dplyr)
 
 zip_zone <- st_read('data/13_application_zip/zip_gimouille.shp') # La seule chose à faire ici est de mettre le chemin d'accès du fichier .shp de la zip
 zip_zone_transf <- st_transform(zip_zone, 2154) #Transformer coordonnées en lam93
-buffer_1000_zip <- st_buffer(zip_zone_transf, dist = 1000)
+buffer_1000_zip <- st_buffer(zip_zone_transf, dist = 1000) #Buffer de 1000m autour pour le calcul des variables
 
 ## 0. Server WFS pour télécharger les mailles pour lesquels les MN (ici MNH) sont disponibles : https://data.geopf.fr/private/wfs/wfs?apikey=interface_catalogue&SERVICE=WFS&REQUEST=GetFeature&VERSION=2.0.0&TYPENAMES=IGNF_LIDAR-HD_TA:derive #### 
 #Le but est ici de créer un script qui télécharge uniquement les mailles intéressantes (dans la zone de buffer)
@@ -66,3 +66,8 @@ Sys.sleep(0)
 print( Sys.time() - start) #Afficher le temps de téléchargement des dalles 
 
 #Maintenant vous avez téléchargé les dalles LiDAR dont vous aviez besoin
+
+#Verification pour voir si les mailles correspondent bien au buffer de la zip
+plot(st_geometry(buffer_1000_zip), col = rgb(1,0,0,0.3), border = "red3", main = "ZIP + Buffer + Mailles")
+plot(st_geometry(zip_zone_transf), col = "darkolivegreen4", border = "darkolivegreen4", add = TRUE)
+plot(st_geometry(mailles_interessantes), col = NA, border = "steelblue", lwd = 2, add = TRUE)
